@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import Card from './components/Card';
 import EventCard from './components/EventCard';
 import ParticipantsList from './components/ParticipantsList';
+import RefundPolicy from './components/RefundPolicy';
 import { Grid, GridItem } from './components/Grid';
 import { theme } from './theme';
 import { Booking } from './ts/types';
@@ -65,7 +66,7 @@ function App() {
           />
         </GridItem>
         <GridItem>
-          <Card>Card 2</Card>
+          <RefundPolicy closingDate="2 janvier 2021" />
         </GridItem>
         <GridItem span="2">
           <ParticipantsList bookings={bookings} />
