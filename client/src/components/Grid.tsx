@@ -24,10 +24,10 @@ const StyledGrid = styled.div<{ theme: DefaultTheme }>`
 `;
 
 // Style des item du composant grille
-const StyledGridItem = styled.div<{ span: number }>`
+const StyledGridItem = styled.div<{ span: string }>`
   display: flex;
   flex-direction: column;
-  grid-column: span ${(props) => props.span};
+  grid-column: span ${(props => props.span)};
   box-sizing: border-box;
   width: 100%;
 `;
@@ -40,18 +40,10 @@ export const Grid: FunctionComponent<{ children: ReactNode }> = ({
 
 Grid.propTypes = { children: PropTypes.node.isRequired };
 
-export const GridItem: FunctionComponent<{
-  children: ReactNode;
-  span: string;
-}> = ({ children, span }) => {
+export const GridItem: FunctionComponent<{ children: ReactNode, span: string }> = ({
+  children,
+  span,
+}) => {
   return <StyledGridItem span={span}>{children}</StyledGridItem>;
 };
 
-GridItem.defaultProps = {
-  span: '1',
-};
-
-GridItem.propTypes = {
-  children: PropTypes.node.isRequired,
-  span: PropTypes.string,
-};

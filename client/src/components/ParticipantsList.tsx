@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { FunctionComponent } from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 import Card from './Card';
@@ -68,7 +68,7 @@ const ListHeading = styled.h4<{ theme: DefaultTheme }>`
   line-height: 24px;
 `;
 
-const ParticipantsList: FunctionComponent<{ bookings: Booking }> = ({
+const ParticipantsList: FunctionComponent<{ bookings: Booking[] }> = ({
   bookings,
 }) => {
   return (
@@ -99,25 +99,6 @@ const ParticipantsList: FunctionComponent<{ bookings: Booking }> = ({
       </Card>
     </>
   );
-};
-
-ParticipantsList.propTypes = {
-  bookings: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      user: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        color: PropTypes.string.isRequired,
-        avatar: PropTypes.shape({
-          url: PropTypes.string.isRequired,
-        }),
-      }),
-      numberOfTickets: PropTypes.number.isRequired,
-      userId: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
 };
 
 export default ParticipantsList;
