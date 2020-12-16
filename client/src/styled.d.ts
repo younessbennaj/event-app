@@ -8,7 +8,11 @@ declare module 'styled-components' {
       primary: string,
       lightPrimary: string,
       success: string,
-      danger: string
+      danger: string,
+      darkGrey: string,
+      lightGrey: string,
+      greyBlue: string,
+      cyan: string
     }
     mediaQueries: {
       small: string,

@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import Card from './components/Card';
 import EventCard from './components/EventCard';
+import ParticipantsList from './components/ParticipantsList';
 import { Grid, GridItem } from './components/Grid';
 import { theme } from './theme';
+import { Booking } from './ts/types';
 
 // Theme Provider Component
 const Theme = ({ children }) => (
@@ -12,6 +14,39 @@ const Theme = ({ children }) => (
 );
 
 Theme.propTypes = { children: PropTypes.node.isRequired };
+
+const bookings: Array<Booking> = [
+  {
+    id: 23,
+    user: {
+      id: 1,
+      firstName: 'Alan',
+      lastName: 'Turing',
+      color: '#a8071a',
+      avatar: {
+        url:
+          'https://i.pinimg.com/originals/21/79/df/2179df963390cab90c3306b956089ff4.jpg',
+      },
+    },
+    numberOfTickets: 4,
+    userId: 1,
+  },
+  {
+    id: 34,
+    user: {
+      id: 3,
+      firstName: 'Steven',
+      lastName: 'Hawk',
+      color: '#ad6800',
+      avatar: {
+        url:
+          'https://img-4.linternaute.com/obvCoHMxF5_9M-oD3iweO1JsPOM=/1240x/smart/5401c6a33c1544b394ad0b07bacb1f40/ccmcms-linternaute/15977875.jpg',
+      },
+    },
+    numberOfTickets: 1,
+    userId: 3,
+  },
+];
 
 function App() {
   return (
@@ -33,7 +68,7 @@ function App() {
           <Card>Card 2</Card>
         </GridItem>
         <GridItem span="2">
-          <Card>Card 3</Card>
+          <ParticipantsList bookings={bookings} />
         </GridItem>
       </Grid>
     </Theme>
