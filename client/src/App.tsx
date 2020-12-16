@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <h1>Event App</h1>
       <Grid>
-        <GridItem span="2">
+        <GridItem span="1">
           <Card>Card 1</Card>
         </GridItem>
         <GridItem>
