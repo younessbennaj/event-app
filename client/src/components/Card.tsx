@@ -7,7 +7,7 @@ const StyledCard = styled.div<{ theme: DefaultTheme }>`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.03);
   border-radius: 12px;
   padding: 16px;
-  border: 1px solid darkgrey;
+  box-sizing: border-box;
 `;
 
 const Card: FunctionComponent<{ children: ReactNode }> = ({ children }) => {

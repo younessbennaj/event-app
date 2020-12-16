@@ -5,12 +5,14 @@ import PropTypes from 'prop-types';
 // Style du composant grille
 const StyledGrid = styled.div<{ theme: DefaultTheme }>`
   display: grid;
+  background-color: #fafafb;
 
   @media ${(props) => props.theme.mediaQueries.small} {
     grid-template-columns: repeat(1, 1fr);
     padding: 16px;
-    grid-column-gap: 16px;
+    grid-column-gap: 0px;
     grid-row-gap: 24px;
+    padding-bottom: 200px;
   }
 
   @media ${(props) => props.theme.mediaQueries.medium} {
@@ -26,6 +28,8 @@ const StyledGridItem = styled.div<{ span: number }>`
   display: flex;
   flex-direction: column;
   grid-column: span ${(props) => props.span};
+  box-sizing: border-box;
+  width: 100%;
 `;
 
 export const Grid: FunctionComponent<{ children: ReactNode }> = ({
