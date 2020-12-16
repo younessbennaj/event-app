@@ -1,3 +1,4 @@
+import { ThemeProvider } from "styled-components";
 
 const theme = {
   colors: {
@@ -14,4 +15,8 @@ const theme = {
   },
 };
 
-export default theme;
+const Theme = ({ children }) => (
+  <ThemeProvider theme={theme}>{children}</ThemeProvider>
+);
+
+export default Theme;
