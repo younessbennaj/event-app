@@ -12,7 +12,8 @@ declare module 'styled-components' {
       darkGrey: string,
       lightGrey: string,
       greyBlue: string,
-      cyan: string
+      cyan: string,
+      lime: string
     }
     mediaQueries: {
       small: string,
