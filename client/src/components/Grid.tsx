@@ -1,12 +1,24 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import styled from 'styled-components';
+import styled, { DefaultTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 
 // Style du composant grille
-const StyledGrid = styled.div<any>`
+const StyledGrid = styled.div<{ theme: DefaultTheme }>`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 1rem;
+
+  @media ${(props) => props.theme.mediaQueries.small} {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 16px;
+    grid-column-gap: 16px;
+    grid-row-gap: 24px;
+  }
+
+  @media ${(props) => props.theme.mediaQueries.medium} {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 72px;
+    grid-column-gap: 16px;
+    grid-row-gap: 64px;
+  }
 `;
 
 // Style des item du composant grille
