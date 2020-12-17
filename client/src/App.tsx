@@ -9,7 +9,7 @@ import RefundPolicy from './components/RefundPolicy';
 import BookinButton from './components/BookingButton';
 import { Grid, GridItem } from './components/Grid';
 import { theme } from './theme';
-import { Booking } from './ts/types';
+import { Booking, Avatar, User } from './ts/types';
 
 // Theme Provider Component
 const Theme = ({ children }) => (
@@ -34,6 +34,19 @@ function App() {
   const [endAt, setEndAt] = useState<string>('');
   const [remainingTickets, setRemainingTickets] = useState<string>('');
   const [closingDate, setClosingDate] = useState<string>('');
+  const [eventId, setEventId] = useState<string>('');
+  // User state
+  const [user, setUser] = useState<User>({
+    firstName: '',
+    lastName: '',
+    id: 0,
+    avatar: {
+      url: '',
+    },
+    color: '',
+  });
+  // UI State
+  const [isBooked, setIsBooked] = useState<boolean>(false);
 
   function formatDate(str, format) {
     const unix = Date.parse(str);
@@ -59,8 +72,51 @@ function App() {
       setBody(response.data.description);
       setRemainingTickets(response.data.remainingTickets.toString());
       setClosingDate(formatDate(response.data.startAt, 'D MMMM YYYY'));
+      setEventId(response.data.id);
     });
   }, []);
+
+  useEffect(() => {
+    axios.get('/user').then((response) => {
+      setUser(response.data);
+      console.log(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    const newBookings = [...bookings];
+    if (isBooked) {
+      // Ce que je ferais si l'API était fonctionnelle:
+      // axios.post(`/bookings/${user.id}`).then((response) => {
+      //   console.log(response.data);
+      // });
+      const newBooking: Booking = {
+        id: Math.floor(Math.random() * 100),
+        user: {
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          color: user.color,
+          avatar: {
+            url: user.avatar.url,
+          },
+        },
+        numberOfTickets: 1,
+        userId: user.id,
+      };
+
+      newBookings.push(newBooking);
+
+      setBookings(newBookings);
+    } else {
+      // Ce que je ferais si l'API était fonctionnelle:
+      // axios.delete(`/bookings/${user.id}`).then((response) => {
+      //   console.log(response.data);
+      // });
+      newBookings.pop();
+      setBookings(newBookings);
+    }
+  }, [isBooked]);
   return (
     <Theme>
       <Grid>
@@ -78,7 +134,7 @@ function App() {
         </GridItem>
         <GridItem span="1">
           <RefundPolicy closingDate="2 janvier 2021" />
-          <BookinButton />
+          <BookinButton setIsBooked={setIsBooked} isBooked={isBooked} />
         </GridItem>
         <GridItem span="2">
           <ParticipantsList bookings={bookings} />

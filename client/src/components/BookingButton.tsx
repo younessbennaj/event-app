@@ -1,4 +1,9 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, {
+  FunctionComponent,
+  ReactNode,
+  SetStateAction,
+  Dispatch,
+} from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 // import PropTypes from 'prop-types';
 import Card from './Card';
@@ -8,7 +13,7 @@ const Inner = styled.div`
   flex-direction: column;
 `;
 
-const SucessButton = styled.button<{ theme: DefaultTheme }>`
+const SuccessButton = styled.button<{ theme: DefaultTheme }>`
   background-color: ${(props) => props.theme.colors.success};
   color: #ffffff;
   font-style: normal;
@@ -21,8 +26,23 @@ const SucessButton = styled.button<{ theme: DefaultTheme }>`
   border-radius: 8px;
 `;
 
-const Message = styled.div`
-  background-color: ${(props) => props.theme.colors.lime};
+const DangerButton = styled.button<{ theme: DefaultTheme }>`
+  background-color: transparent;
+  color: ${(props) => props.theme.colors.danger};
+  border: 1px solid ${(props) => props.theme.colors.danger};
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+`;
+
+const Message = styled.div<{ isBooked: boolean }>`
+  background-color: ${(props) =>
+    props.isBooked ? props.theme.colors.polarGreen : props.theme.colors.lime};
   color: ${(props) => props.theme.colors.success};
   padding-top: 16px;
   padding-bottom: 16px;
@@ -58,14 +78,36 @@ const Container = styled.div`
   }
 `;
 
-const BookingButton: FunctionComponent = () => {
+const BookingButton: FunctionComponent<{
+  setIsBooked: Dispatch<SetStateAction<boolean>>;
+  isBooked: boolean;
+}> = ({ setIsBooked, isBooked }) => {
+  function handleClick() {
+    if (isBooked) setIsBooked(false);
+    else setIsBooked(true);
+  }
   return (
     <Container>
       <Inner>
-        <Message>
-          <span>Gratuit</span>
+        <Message isBooked={isBooked}>
+          {isBooked ? (
+            <span>
+              🎉 J&#39;y vais! <b>(1 place réservée)</b>
+            </span>
+          ) : (
+            <span>Gratuit</span>
+          )}
         </Message>
-        <SucessButton type="button">Réserver</SucessButton>
+        {!isBooked && (
+          <SuccessButton onClick={handleClick} type="button">
+            Réserver
+          </SuccessButton>
+        )}
+        {isBooked && (
+          <DangerButton onClick={handleClick} type="button">
+            Modifier ma réservation
+          </DangerButton>
+        )}
       </Inner>
     </Container>
   );
