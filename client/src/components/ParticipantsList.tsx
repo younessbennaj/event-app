@@ -68,6 +68,21 @@ const ListHeading = styled.h4<{ theme: DefaultTheme }>`
   line-height: 24px;
 `;
 
+const DefaultAvatar = styled.div<{ theme: DefaultTheme; color: string }>`
+  width: 40px;
+  height: 40px;
+  background-color: ${(props) => props.color};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  color: #ffffff;
+`;
+
 const ParticipantsList: FunctionComponent<{ bookings: Booking[] }> = ({
   bookings,
 }) => {
@@ -85,7 +100,15 @@ const ParticipantsList: FunctionComponent<{ bookings: Booking[] }> = ({
               return (
                 <li key={booking.id}>
                   <AttendeeLine>
-                    <Avatar url={booking.user.avatar.url} />
+                    {booking.user.avatar.url && (
+                      <Avatar url={booking.user.avatar.url} />
+                    )}
+                    {!booking.user.avatar.url && (
+                      <DefaultAvatar color={booking.user.color}>
+                        {booking.user.firstName.slice(0, 1)}
+                        {booking.user.lastName.slice(0, 1)}
+                      </DefaultAvatar>
+                    )}
                     <p>
                       {booking.user.firstName} {booking.user.lastName}
                     </p>
