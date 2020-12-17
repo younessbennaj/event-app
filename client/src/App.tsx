@@ -9,7 +9,7 @@ import RefundPolicy from './components/RefundPolicy';
 import BookinButton from './components/BookingButton';
 import { Grid, GridItem } from './components/Grid';
 import { theme } from './theme';
-import { Booking } from './ts/types';
+import { Booking, Avatar, User } from './ts/types';
 
 // Theme Provider Component
 const Theme = ({ children }) => (
@@ -21,18 +21,6 @@ Theme.propTypes = { children: PropTypes.node.isRequired };
 interface Date {
   month: string;
   day: string;
-}
-
-interface Avatar {
-  url: string;
-}
-
-interface User {
-  firstName: string;
-  lastName: string;
-  avatar: Avatar;
-  id: number;
-  color: string;
 }
 
 function App() {
