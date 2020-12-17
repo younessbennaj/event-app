@@ -36,7 +36,6 @@ const DangerButton = styled.button<{ theme: DefaultTheme }>`
   line-height: 24px;
   padding-top: 8px;
   padding-bottom: 8px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
 `;
 
