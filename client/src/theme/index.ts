@@ -13,6 +13,7 @@ export const theme: DefaultTheme = {
     greyBlue: '#8295A9',
     cyan: '#006D75',
     lime: '#F8FDD9',
+    polarGreen: '#EBFFD6',
   },
   mediaQueries: {
     small: 'only screen and (min-width: 300px)',
