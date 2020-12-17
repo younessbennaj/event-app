@@ -9,7 +9,7 @@ import RefundPolicy from './components/RefundPolicy';
 import BookinButton from './components/BookingButton';
 import { Grid, GridItem } from './components/Grid';
 import { theme } from './theme';
-import { Booking, Avatar, User } from './ts/types';
+import { Booking, User } from './ts/types';
 
 // Theme Provider Component
 const Theme = ({ children }) => (
@@ -34,7 +34,6 @@ function App() {
   const [endAt, setEndAt] = useState<string>('');
   const [remainingTickets, setRemainingTickets] = useState<string>('');
   const [closingDate, setClosingDate] = useState<string>('');
-  const [eventId, setEventId] = useState<string>('');
   // User state
   const [user, setUser] = useState<User>({
     firstName: '',
@@ -50,8 +49,8 @@ function App() {
 
   function formatDate(str, format) {
     const unix = Date.parse(str);
-    const dateMoment = moment(unix).locale('fr');
-    return dateMoment.format(format);
+    const dateMoment = moment(unix);
+    return dateMoment.locale('fr').format(format);
   }
 
   useEffect(() => {
@@ -72,14 +71,12 @@ function App() {
       setBody(response.data.description);
       setRemainingTickets(response.data.remainingTickets.toString());
       setClosingDate(formatDate(response.data.startAt, 'D MMMM YYYY'));
-      setEventId(response.data.id);
     });
   }, []);
 
   useEffect(() => {
     axios.get('/user').then((response) => {
       setUser(response.data);
-      console.log(response.data);
     });
   }, []);
 
@@ -133,7 +130,7 @@ function App() {
           />
         </GridItem>
         <GridItem span="1">
-          <RefundPolicy closingDate="2 janvier 2021" />
+          <RefundPolicy closingDate={closingDate} />
           <BookinButton setIsBooked={setIsBooked} isBooked={isBooked} />
         </GridItem>
         <GridItem span="2">

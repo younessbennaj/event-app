@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import styled, { DefaultTheme } from 'styled-components';
-import PropTypes from 'prop-types';
 import Card from './Card';
 import { Booking } from '../ts/types';
 

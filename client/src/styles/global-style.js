@@ -3,7 +3,10 @@ import { createGlobalStyle } from 'styled-components';
 //Ici j'initilise le style de base de notre application
 
 export default createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
+    @font-face {
+        font-family: 'SF Pro';
+        src: local('SF Pro'), url(../fonts/SF-Front.dmg) format('dmg');
+    }
     *,
     *::before,
     * {
@@ -27,7 +30,7 @@ export default createGlobalStyle`
     }
     
     body {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'SF Pro', sans-serif;
         font-weight: 400;
         font-size: 1rem;
         line-height: 1.6em;
